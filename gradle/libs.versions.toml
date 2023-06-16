@@ -1,0 +1,81 @@
+[versions]
+
+
+retrofit = "2.7.2"
+converter-gson = "2.4.0"
+okhttp3_loggin_interceptor = "4.9.1"
+freesoundapi_client = "1.0.0"
+dagger_hilt = "2.44"
+hilt_navcompose = "1.0.0"
+javaxInject = "1"
+gson = "2.8.6"
+json-serialization = "1.5.0"
+compose-util = "1.4.3"
+
+pagin-version = "3.1.1"
+pagin-compose = "1.0.0-alpha20"
+material3 = "1.1.0"
+kotlinx_coroutines_core = "1.6.4"
+material = "1.9.0"
+compose_material_icons_core = "1.4.3"
+compose_material_icons_extended = "1.4.3"
+navigation-compose = "2.5.3"
+acompanist-pager = "0.31.3-beta"
+agp = "8.1.0-beta04"
+org-jetbrains-kotlin-android = "1.8.10"
+core-ktx = "1.9.0"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+appcompat = "1.6.1"
+coil_compose = "2.3.0"
+
+
+
+[libraries]
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter-gson"}
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3_loggin_interceptor" }
+freesound-api-client = { group = "org.freep.com", name = "api-client", version.ref = "freesoundapi_client" }
+dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger_hilt" }
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger_hilt" }
+hilt-navigation-compose = {module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt_navcompose"}
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+compose-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose-util"}
+json-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "json-serialization" }
+pagin-compose = {module = "androidx.paging:paging-compose", version.ref = "pagin-compose"}
+pagin = { module = "androidx.paging:paging-runtime", version.ref = "pagin-version" }
+compose-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "acompanist-pager"}
+material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+compose_material_icons_core = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "compose_material_icons_core" }
+compose_material_icons_extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose_material_icons_extended" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose"}
+kotlinx_coroutines_core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx_coroutines_core" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+coil_compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil_compose" }
+
+
+
+
+
+
+#[plugins]
+#com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
+#org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+
+
+[bundles]
+pagin = [
+    "pagin-compose",
+    "pagin",
+    "compose-pager"
+]
+[plugins]
+com-android-application = { id = "com.android.application", version.ref = "agp" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
