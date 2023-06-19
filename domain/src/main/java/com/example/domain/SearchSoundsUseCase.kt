@@ -7,8 +7,8 @@ class SearchSoundsUseCase @Inject constructor(private val songsRepo: SongsRepo) 
     suspend fun execute(
         page: Int,
         pageSize: Int,
-        search: String
+        search: String?= null
     ): List<Song> {
-        return songsRepo.getSongs(page, pageSize, search)
+        return songsRepo.search(page, pageSize, search)
     }
 }

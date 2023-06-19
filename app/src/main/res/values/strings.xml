@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CleanMusicPlayer</string>
+    <string name="search">search\n\t</string>
 </resources>

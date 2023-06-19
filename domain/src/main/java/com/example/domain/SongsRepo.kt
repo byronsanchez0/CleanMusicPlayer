@@ -6,7 +6,7 @@ interface SongsRepo {
     suspend fun search(
         page: Int,
         pageSize: Int,
-        search: String
+        search: String?= null
     ): List<Song>
 
 //    suspend fun searchSongs(
@@ -15,3 +15,4 @@ interface SongsRepo {
 //    ): List<Song>
 
 }
+
