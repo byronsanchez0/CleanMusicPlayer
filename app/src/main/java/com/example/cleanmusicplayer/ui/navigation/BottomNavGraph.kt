@@ -32,7 +32,6 @@ fun BottomNavGraph(
             backStackEntry.arguments?.getInt("id")?.let { id ->
                 MediaPlayerScreen(id)
             }
-
         }
     }
 }

@@ -2,10 +2,12 @@ package com.example.cleanmusicplayer.ui.screens.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.media3.common.MediaItem
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.data.media.mediaservice.MediaServiceManager
 import com.example.cleanmusicplayer.ui.screens.search.utils.paging.SongPagingSource
 import com.example.domain.SearchSoundsUseCase
 import com.example.domain.model.Song
@@ -20,17 +22,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchSoundsUseCase: SearchSoundsUseCase
+    private val searchSoundsUseCase: SearchSoundsUseCase,
+    private val mediaServiceManager: MediaServiceManager
 ): ViewModel(){
 
     private val searchValue = MutableStateFlow("")
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
+    fun addMediaItem(mediaItem: MediaItem){
+        return mediaServiceManager.addMediaItem(mediaItem)
+    }
+
 
     private val _songsUiState = MutableStateFlow(
         SearchUiState(
             onSearchChanged = this::searchSongs,
+            onPlaySong = this::addMediaItem
         )
     )
 

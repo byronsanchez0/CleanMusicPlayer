@@ -12,7 +12,7 @@ interface SongsRepo {
 
     suspend fun getSong(
         id: Int
-    ): Song?
+    ): Song
 
 }
 

@@ -63,6 +63,7 @@ fun SearchScreen(
     val songsUiState by viewModel.songsUiState.collectAsState()
     val songList = viewModel.songFlow.collectAsLazyPagingItems()
     val loading = viewModel.isLoading.collectAsState()
+//    val onPlaySong = viewModel.
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -73,30 +74,10 @@ fun SearchScreen(
             onSearch = songsUiState.onSearchChanged,
             songList = songList,
             isLoading = loading.value,
-            navController = navController
+            navController = navController,
+//            onPlay = songsUiState.onPlaySong
         )
     }
-
-//    Column(modifier = modifier) {
-//        OutlinedTextField(
-//            value = searchQuery.value,
-//            onValueChange = { searchQuery.value = it },
-//            label = { Text("Search") },
-//            trailingIcon = { IconButton(onClick = { viewModel.searchSongs(searchQuery.value) })
-//            { Icon(Icons.Default.Search, contentDescription = "Search Icon") } },
-//            singleLine = true,
-//            modifier = Modifier.fillMaxWidth()
-//        )
-//
-//        searchResults?.let { results ->
-//            LazyColumn {
-//                items(results) { result ->
-//                    Text(text = result.name)  // Assuming SoundResult has a property 'title'
-//                }
-//            }
-//        }
-//    }
-
 }
 
 @Composable
@@ -104,7 +85,8 @@ fun SearchScreenContent(
     onSearch: (String) -> Unit,
     songList: LazyPagingItems<Song>,
     isLoading: Boolean,
-    navController: NavHostController
+    navController: NavHostController,
+//    onPlay: (MediaItem) -> Unit
 ) {
     val context = LocalContext.current
 //    var exoPlayer: ExoPlayer
@@ -125,7 +107,8 @@ fun SearchScreenContent(
                         song = song,
                         modifier = Modifier.fillMaxSize(),
                         navController = navController,
-                        context = context
+                        context = context,
+//                        onPlay = onPlay
                     )
                 }
             }
@@ -145,7 +128,8 @@ fun AnimeItem(
     song: Song,
     navController: NavController,
     modifier: Modifier,
-    context: Context
+    context: Context,
+//    onPlay: (MediaItem) -> Unit
 ) {
     val painter = rememberAsyncImagePainter(model = song.images.previewMp3)
 //    val aFavAnime = favoriteAnime.contains(anime.id)
@@ -183,6 +167,8 @@ fun AnimeItem(
             )
             IconButton(onClick = {
                 exoPlayer.setMediaItem(MediaItem.fromUri(song.previews.preview_hq_mp3))
+//                onPlay()
+
                 exoPlayer.prepare()
                 exoPlayer.play()
             }) {

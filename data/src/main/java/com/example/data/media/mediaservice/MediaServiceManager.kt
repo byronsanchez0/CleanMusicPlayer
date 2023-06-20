@@ -1,10 +1,17 @@
-package com.example.cleanmusicplayer.ui.screens.search.utils.MediaService
+package com.example.data.media.mediaservice
 
+import android.annotation.SuppressLint
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -15,7 +22,9 @@ class MediaServiceManager @Inject constructor(
 ) : Player.Listener {
 
     private val _mediaState = MutableStateFlow<MediaState>(MediaState.Initial)
+
     val mediaState = _mediaState.asStateFlow()
+
 
     private var job: Job? = null
 
@@ -30,11 +39,11 @@ class MediaServiceManager @Inject constructor(
         player.play()
     }
 
-    suspend fun onPlayerEvent(playerEvent: PlayerEvent) {
+    suspend fun onPlayerEvent(playerEvent: ManageSong) {
         when (playerEvent) {
-            PlayerEvent.Backward -> seekPlayer(player, SEEK_SECONDS, false)
-            PlayerEvent.Forward -> seekPlayer(player, SEEK_SECONDS, true)
-            PlayerEvent.PlayPause -> {
+            ManageSong.Backward -> seekPlayer(player, SEEK_SECONDS, false)
+            ManageSong.Forward -> seekPlayer(player, SEEK_SECONDS, true)
+            ManageSong.PlayPause -> {
                 if (player.isPlaying) {
                     player.pause()
                     stopProgressUpdate()
@@ -44,17 +53,20 @@ class MediaServiceManager @Inject constructor(
                     startProgressUpdate()
                 }
             }
-            PlayerEvent.Stop -> stopProgressUpdate()
-            is PlayerEvent.UpdateProgress ->
+            ManageSong.Stop -> stopProgressUpdate()
+            is ManageSong.UpdateProgress ->
                 player.seekTo((player.duration * playerEvent.newProgress).toLong())
         }
     }
 
+
     @SuppressLint("SwitchIntDef")
     override fun onPlaybackStateChanged(playbackState: Int) {
         when (playbackState) {
+
             ExoPlayer.STATE_BUFFERING -> _mediaState.value =
                 MediaState.Buffering(player.currentPosition)
+
 
             ExoPlayer.STATE_READY -> _mediaState.value =
                 MediaState.Ready(player.duration)

@@ -54,4 +54,5 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
     implementation(libs.dagger.hilt)
     implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.bundles.media3)
 }

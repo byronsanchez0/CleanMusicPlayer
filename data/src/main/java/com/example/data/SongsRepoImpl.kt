@@ -24,7 +24,7 @@ class SongsRepoImpl @Inject constructor(private val apiService: FreeSoundApiServ
         return response.results.map { it.toSong() }
     }
 
-    override suspend fun getSong(id: Int): Song? {
+    override suspend fun getSong(id: Int): Song {
         val response = apiService.getSound(id)
         return response.toSong()
     }
