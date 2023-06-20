@@ -19,7 +19,6 @@ import javax.inject.Singleton
 object DataModule {
 
     @Provides
-
     fun provideInterceptor(): MyTokenInterceptor{
         val myToken = "U5MVXqy7LT31EfmZJTMaUayY58TL1M8b8SvmBaeA"
         return MyTokenInterceptor(token = myToken)
@@ -47,10 +46,13 @@ object DataModule {
     @Singleton
     fun provideMyApiService(retrofit: Retrofit): FreeSoundApiService = retrofit.create(FreeSoundApiService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideSoundRepo(apiService: FreeSoundApiService):SongsRepo{
-        return SongsRepoImpl(apiService)
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object RepositoryModule{
+        @Provides
+        @Singleton
+        fun  provideSoundRepo(apiService: FreeSoundApiService):SongsRepo = SongsRepoImpl(apiService)
     }
+
 
 }

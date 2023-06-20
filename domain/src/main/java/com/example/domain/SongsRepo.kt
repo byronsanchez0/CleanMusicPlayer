@@ -3,16 +3,16 @@ package com.example.domain
 import com.example.domain.model.Song
 
 interface SongsRepo {
-    suspend fun search(
+    suspend fun searchSongs(
+        search: String,
         page: Int,
         pageSize: Int,
-        search: String?= null
+
     ): List<Song>
 
-//    suspend fun searchSongs(
-//        pages: Int,
-//        search: String
-//    ): List<Song>
+    suspend fun getSong(
+        id: Int
+    ): Song?
 
 }
 

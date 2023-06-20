@@ -29,6 +29,7 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 appcompat = "1.6.1"
 coil_compose = "2.3.0"
+media3= "1.0.2"
 
 
 
@@ -59,6 +60,9 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 coil_compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil_compose" }
+media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3" }
+media3-exoplayer-dash = { group = "androidx.media3", name = "media3-exoplayer-dash", version.ref = "media3" }
+media3-exoplayer-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3" }
 
 
 
@@ -76,6 +80,12 @@ pagin = [
     "pagin",
     "compose-pager"
 ]
+media3 = [
+"media3-exoplayer",
+"media3-exoplayer-dash",
+"media3-exoplayer-ui"
+]
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }

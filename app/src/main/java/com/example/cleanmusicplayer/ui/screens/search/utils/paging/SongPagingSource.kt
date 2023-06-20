@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class SongPagingSource(
     private val searchSoundUseCase: SearchSoundsUseCase,
-    private val search: String? = null,
+    private val search: String,
     private val loadingUI: MutableStateFlow<Boolean>
 ) : PagingSource<Int, Song>() {
 
@@ -23,10 +23,10 @@ class SongPagingSource(
         loadingUI.emit(true)
         return try {
             val page = params.key ?: 1
-            val pageSize = 5
+//            val pageSize = 5
             val response = searchSoundUseCase.execute(
                 page = page,
-                pageSize = pageSize,
+                pageSize = 10,
                 search = search
             )
             loadingUI.emit(false)

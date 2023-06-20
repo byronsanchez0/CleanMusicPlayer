@@ -10,7 +10,8 @@ fun SongResult.toSong(): Song{
     return Song(
         id = id,
         name = name,
-        preview = Preview(preview.previewR_hq_mp3),
-        image = Image(image.previewRMp3)
+        username = username,
+        previews = Preview(previews.previewR_hq_mp3),
+        images = Image(images.waveform_l)
     )
 }

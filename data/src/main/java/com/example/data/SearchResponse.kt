@@ -3,16 +3,16 @@ package com.example.data
 import com.google.gson.annotations.SerializedName
 
 data class SearchResponse(
-    @SerializedName("Search")
-    val search: List<SongResult>,
-    val totalResult:Int,
+    val results: List<SongResult>,
+    val count:Int,
 )
 
 data class SongResult(
     val id: String,
     val name: String,
-    val preview: PreviewResult,
-    val image: ImageResult
+    val username: String,
+    val previews: PreviewResult,
+    val images: ImageResult
 )
 
 data class PreviewResult(
@@ -21,6 +21,6 @@ data class PreviewResult(
 )
 data class ImageResult(
     @SerializedName("waveform_l")
-    val previewRMp3: String
+    val waveform_l: String
 )
 

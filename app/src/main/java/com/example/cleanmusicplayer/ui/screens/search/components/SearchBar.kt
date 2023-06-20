@@ -14,19 +14,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.cleanmusicplayer.R
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     onSearch: (String) -> Unit
 ) {
+
     var query by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
 
     TextField(
         value = query,
@@ -46,6 +50,9 @@ fun SearchBar(
                 contentDescription = stringResource(R.string.search),
                 modifier = Modifier
                     .clickable {
+                        scope.launch {
+                            onSearch(query)
+                        }
                     }
             )
         }
@@ -54,6 +61,6 @@ fun SearchBar(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun topBarPreview(){
-    SearchBar(onSearch= {})
+fun topBarPreview() {
+    SearchBar(onSearch = {})
 }

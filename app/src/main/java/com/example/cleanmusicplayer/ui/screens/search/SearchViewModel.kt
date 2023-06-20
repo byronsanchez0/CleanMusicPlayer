@@ -15,9 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,28 +23,27 @@ class SearchViewModel @Inject constructor(
     private val searchSoundsUseCase: SearchSoundsUseCase
 ): ViewModel(){
 
-    private val _search = MutableStateFlow<String?>("")
-//    private val search : StateFlow<String> = _search
+    private val searchValue = MutableStateFlow("")
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
-    private val _uiSearchState = MutableStateFlow(
+
+    private val _songsUiState = MutableStateFlow(
         SearchUiState(
-            onSearchChanged = this::search,
+            onSearchChanged = this::searchSongs,
         )
     )
 
-    val uiSearchState = _uiSearchState.asStateFlow()
+    val songsUiState = _songsUiState.asStateFlow()
 
 
-    private fun search(query: String) {
-        viewModelScope.launch {
-            _search.value = query
-        }
+
+     fun searchSongs(query: String) {
+        searchValue.value = query
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val songFlow: Flow<PagingData<Song>> = _search.flatMapLatest {
+    val songFlow: Flow<PagingData<Song>> = searchValue.flatMapLatest { searchvalue ->
         Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
@@ -55,45 +52,17 @@ class SearchViewModel @Inject constructor(
             pagingSourceFactory = {
                 SongPagingSource(
                     searchSoundsUseCase,
-                    it,
+                    searchvalue,
                     _isLoading
                 )
             }
         ).flow
     }.cachedIn(viewModelScope)
 
-//    val flow = Pager(
-//        // Configure how data is loaded by passing additional properties to
-//        // PagingConfig, such as prefetchDistance.
-//        PagingConfig(pageSize = 10)
-//    ) {
-//        SongPagingSource(searchSoundsUseCase, _search.value.toString(), _isLoading)
-//    }.flow
-//        .cachedIn(viewModelScope)
 
 
-
-
-
-    private fun createPaging(
-        search: String?
-    ): Pager<Int, Song> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = PAGE_SIZE,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = {
-                SongPagingSource(
-                    searchSoundsUseCase,
-                    search,
-                    _isLoading
-                )
-            }
-        )
-    }
     companion object {
-        private const val PAGE_SIZE = 10
+        private const val PAGE_SIZE = 6
     }
 
 }

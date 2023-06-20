@@ -3,8 +3,9 @@ package com.example.domain.model
 data class Song(
     val id: String,
     val name: String,
-    val preview: Preview,
-    val image: Image
+    val username: String,
+    val previews: Preview,
+    val images: Image
 )
 
 data class Preview(

@@ -2,6 +2,7 @@ package com.example.data
 
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface FreeSoundApiService {
@@ -10,6 +11,11 @@ interface FreeSoundApiService {
         @Query("query") query: String,
         @Query("page") page: String,
         @Query("page_size") pageSize: String = "15",
-        @Query("fields") fields: String = "id,name,previews,images"
+        @Query("fields") fields: String = "id,name,username,previews,images"
     ):SearchResponse
+
+    @GET("apiv2/sounds/{sound_id}")
+    suspend fun getSound(
+        @Path("sound_id") sound_id: Int
+    ): SongResult
 }
