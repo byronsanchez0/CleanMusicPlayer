@@ -57,11 +57,11 @@ object DataModule {
         fun  provideSoundRepo(apiService: FreeSoundApiService):SongsRepo = SongsRepoImpl(apiService)
     }
 
-    @Provides
-    @Singleton
-    fun provideExoPlayer(@ApplicationContext context: Context):ExoPlayer{
-        return ExoPlayer.Builder(context).build()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideExoPlayer(@ApplicationContext context: Context):ExoPlayer{
+//        return ExoPlayer.Builder(context).build()
+//    }
 
 
 }

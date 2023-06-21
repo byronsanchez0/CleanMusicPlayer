@@ -55,4 +55,6 @@ dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.okhttp3.logging.interceptor)
     implementation(libs.bundles.media3)
+    implementation(libs.glide)
+    implementation(libs.androidx.legacy.support.v4)
 }
