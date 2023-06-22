@@ -20,7 +20,6 @@ class NotificationMediaAdapter(
     override fun getCurrentContentTitle(player: Player): CharSequence =
         (player.mediaMetadata.albumTitle as String?).orEmpty()
 
-
     override fun createCurrentContentIntent(player: Player): PendingIntent? = pendingIntent
 
     override fun getCurrentContentText(player: Player): CharSequence? =
@@ -32,7 +31,9 @@ class NotificationMediaAdapter(
     ): Bitmap? {
         Glide.with(context)
             .asBitmap()
-            .load(player.mediaMetadata.artworkUri)
+            .load(
+                player.mediaMetadata.artworkUri
+            )
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onLoadCleared(placeholder: Drawable?) = Unit

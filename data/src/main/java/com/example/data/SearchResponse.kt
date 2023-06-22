@@ -23,4 +23,3 @@ data class ImageResult(
     @SerializedName("waveform_l")
     val waveform_l: String
 )
-

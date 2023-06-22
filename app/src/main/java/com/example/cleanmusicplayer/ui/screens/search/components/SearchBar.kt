@@ -61,6 +61,6 @@ fun SearchBar(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun topBarPreview() {
+fun TopBarPreview() {
     SearchBar(onSearch = {})
 }

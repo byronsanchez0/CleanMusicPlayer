@@ -7,15 +7,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.data.media.mediaservice.MediaServiceManager
 import com.example.cleanmusicplayer.ui.screens.search.utils.paging.SongPagingSource
+import com.example.data.mediaservice.MediaServiceManager
 import com.example.domain.SearchSoundsUseCase
 import com.example.domain.model.Song
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
@@ -24,16 +23,14 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val searchSoundsUseCase: SearchSoundsUseCase,
     private val mediaServiceManager: MediaServiceManager
-): ViewModel(){
-
+) : ViewModel() {
     private val searchValue = MutableStateFlow("")
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
-    fun addMediaItem(mediaItem: MediaItem){
+    fun addMediaItem(mediaItem: MediaItem) {
         return mediaServiceManager.addMediaItem(mediaItem)
     }
-
 
     private val _songsUiState = MutableStateFlow(
         SearchUiState(
@@ -43,10 +40,7 @@ class SearchViewModel @Inject constructor(
     )
 
     val songsUiState = _songsUiState.asStateFlow()
-
-
-
-     fun searchSongs(query: String) {
+    fun searchSongs(query: String) {
         searchValue.value = query
     }
 
@@ -67,11 +61,7 @@ class SearchViewModel @Inject constructor(
         ).flow
     }.cachedIn(viewModelScope)
 
-
-
     companion object {
         private const val PAGE_SIZE = 6
     }
-
 }
-

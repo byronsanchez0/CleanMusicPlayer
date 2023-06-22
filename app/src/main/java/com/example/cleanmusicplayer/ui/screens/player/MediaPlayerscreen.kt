@@ -16,7 +16,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.material3.Icon
@@ -32,23 +31,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
-import com.example.cleanmusicplayer.ui.screens.search.utils.ManageUI.UiManage
 import com.example.cleanmusicplayer.R
-import com.example.data.media.mediaservice.ManageSong
+import com.example.cleanmusicplayer.ui.screens.search.utils.uiManage.UiManage
 
 
-//fun MediaPlayerScreen(
-//    id: Int,
-//    playerViewModel: playerViewModel = hiltViewModel(),
-//) {
 @Composable
 fun MediaPlayerScreen(
     id: Int,
@@ -61,9 +52,6 @@ fun MediaPlayerScreen(
         playerViewModel.fetchAnimeDetails(id = id)
     }
     val painter = rememberAsyncImagePainter(model = uiState.image)
-    val progressProvider = Pair(uiState.progress, uiState.progressString)
-//    val songDetails by playerViewModel.song.collectAsState(null)
-
 
     Column(
         modifier = Modifier
@@ -98,13 +86,7 @@ fun MediaPlayerScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-//                .padding(horizontal = dimensionResource(id = androidx.compose.foundation.layout.R.dimen.padding_16dp))
         ) {
-//            Text(
-//                text = uiState.progress.toString(),
-//                style = MaterialTheme.typography.bodyMedium,
-//                color = MaterialTheme.colorScheme.primary
-//            )
             Text(
                 text = uiState.progressString,
                 style = MaterialTheme.typography.bodyMedium,
@@ -121,31 +103,13 @@ fun MediaPlayerScreen(
         )
         PlayerButtons(uiManage = uiState.uiManage, isPlaying = uiState.isPlaying)
     }
-
-
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun MediaPlayerScreenPreview() {
-    val id = 3
-    MediaPlayerScreen(id)
 }
 
 @Composable
 fun PlayerButtons(
-//id : Int,
     isPlaying: Boolean,
     uiManage: (UiManage) -> Unit
 ) {
-//    val playBtn by viewModel.playBtn.collectAsState()
-
-//    val player = ExoPlayer.Builder(context)
-//    LaunchedEffect(key1 = id) {
-//        playerViewModel.fetchAnimeDetails(id = id, playerEvent = playerEvent)
-//    }
-
-
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically,
@@ -166,11 +130,14 @@ fun PlayerButtons(
         }
         Spacer(modifier = Modifier.width(8.dp))
         Image(
-            painter = painterResource(id =  if (isPlaying) R.drawable.ic_pause_ else R.drawable.ic_play),
+            painter = painterResource(id = if (isPlaying) R.drawable.ic_pause_ else R.drawable.ic_play),
             contentDescription = "Play",
-            modifier = Modifier.clickable{
-            uiManage(UiManage.PlayBackAction)
-        })
+            modifier = Modifier
+                .clickable {
+                    uiManage(UiManage.PlayBackAction)
+                }
+                .size(40.dp)
+        )
         Spacer(modifier = Modifier.width(8.dp))
         IconButton(
             onClick = {
@@ -186,9 +153,12 @@ fun PlayerButtons(
 
             )
         }
-
-
     }
 }
 
-
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun MediaPlayerScreenPreview() {
+    val id = 30
+    MediaPlayerScreen(id)
+}

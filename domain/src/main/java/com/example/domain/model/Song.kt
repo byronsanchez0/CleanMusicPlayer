@@ -11,7 +11,7 @@ data class Song(
 data class Preview(
     val preview_hq_mp3: String
 )
+
 data class Image(
     val previewMp3: String
 )
-

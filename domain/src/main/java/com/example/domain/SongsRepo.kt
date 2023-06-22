@@ -7,12 +7,9 @@ interface SongsRepo {
         search: String,
         page: Int,
         pageSize: Int,
-
     ): List<Song>
 
     suspend fun getSong(
         id: Int
     ): Song
-
 }
-

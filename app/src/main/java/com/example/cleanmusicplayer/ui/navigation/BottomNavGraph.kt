@@ -27,12 +27,11 @@ fun BottomNavGraph(
         }
         composable(
             route = BottomNavItem.Player.route,
-            arguments = listOf(navArgument("id"){ type = NavType.IntType})
-            ) { backStackEntry ->
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
             backStackEntry.arguments?.getInt("id")?.let { id ->
                 MediaPlayerScreen(id)
             }
         }
     }
 }
-

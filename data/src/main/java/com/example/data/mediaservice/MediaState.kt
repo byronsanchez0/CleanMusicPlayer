@@ -1,4 +1,4 @@
-package com.example.data.media.mediaservice
+package com.example.data.mediaservice
 
 sealed class MediaState {
     object Initial: MediaState()

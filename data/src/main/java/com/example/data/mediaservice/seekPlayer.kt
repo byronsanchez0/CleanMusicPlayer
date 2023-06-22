@@ -1,4 +1,4 @@
-package com.example.data.media.mediaservice
+package com.example.data.mediaservice
 
 import androidx.media3.common.Player
 import java.util.concurrent.TimeUnit
@@ -8,7 +8,7 @@ fun seekPlayer(player: Player, seconds: Long, isForward: Boolean) {
     val time = TimeUnit.SECONDS.toMillis(seconds)
     val newPosition = if (isForward) {
         (player.currentPosition + time).coerceAtMost(player.duration)
-    }else{
+    } else {
         (player.currentPosition - time).coerceAtLeast(MIMINUM_VALUE)
     }
     player.seekTo(newPosition)

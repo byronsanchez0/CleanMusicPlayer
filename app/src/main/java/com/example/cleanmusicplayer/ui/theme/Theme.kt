@@ -78,7 +78,7 @@ private val LightColorScheme = lightColorScheme(
     surfaceTint = Color(0xFF325CA8),
     outlineVariant = Color(0xFFC5C6D0),
     scrim = Color(0xFF000000),
-)
+    )
 
 @Composable
 fun CleanMusicPlayerTheme(

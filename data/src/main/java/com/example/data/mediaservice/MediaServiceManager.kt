@@ -1,4 +1,4 @@
-package com.example.data.media.mediaservice
+package com.example.data.mediaservice
 
 import android.annotation.SuppressLint
 import androidx.media3.common.MediaItem
@@ -24,8 +24,6 @@ class MediaServiceManager @Inject constructor(
     private val _mediaState = MutableStateFlow<MediaState>(MediaState.Initial)
 
     val mediaState = _mediaState.asStateFlow()
-
-
     private var job: Job? = null
 
     init {
@@ -53,20 +51,18 @@ class MediaServiceManager @Inject constructor(
                     startProgressUpdate()
                 }
             }
+
             ManageSong.Stop -> stopProgressUpdate()
             is ManageSong.UpdateProgress ->
                 player.seekTo((player.duration * playerEvent.newProgress).toLong())
         }
     }
 
-
     @SuppressLint("SwitchIntDef")
     override fun onPlaybackStateChanged(playbackState: Int) {
         when (playbackState) {
-
             ExoPlayer.STATE_BUFFERING -> _mediaState.value =
                 MediaState.Buffering(player.currentPosition)
-
 
             ExoPlayer.STATE_READY -> _mediaState.value =
                 MediaState.Ready(player.duration)

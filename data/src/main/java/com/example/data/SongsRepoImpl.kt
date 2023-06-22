@@ -18,8 +18,6 @@ class SongsRepoImpl @Inject constructor(private val apiService: FreeSoundApiServ
             page.toString(),
             pageSize.toString()
         )
-
-
         Log.wtf("error", "${response}")
         return response.results.map { it.toSong() }
     }
@@ -28,6 +26,4 @@ class SongsRepoImpl @Inject constructor(private val apiService: FreeSoundApiServ
         val response = apiService.getSound(id)
         return response.toSong()
     }
-
-
 }

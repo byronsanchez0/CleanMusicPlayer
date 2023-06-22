@@ -6,15 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
-import com.example.cleanmusicplayer.ui.screens.search.utils.ManageUI.UiManage
-import com.example.data.media.mediaservice.ManageSong
-import com.example.data.media.mediaservice.MediaServiceManager
-import com.example.data.media.mediaservice.MediaState
+import com.example.cleanmusicplayer.ui.screens.search.utils.uiManage.UiManage
+import com.example.data.mediaservice.ManageSong
+import com.example.data.mediaservice.MediaServiceManager
+import com.example.data.mediaservice.MediaState
 import com.example.domain.getSongUseCase
 import com.example.domain.model.Song
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -28,12 +27,6 @@ class playerViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _song = MutableStateFlow<Song?>(null)
-    val song: StateFlow<Song?> = _song
-    val position = mediaServiceManager.mediaState
-//    val manageSong ManageSong()
-//    val events = mediaServiceManager.onPlayerEvent()
-
-
     val _uiState = MutableStateFlow(
         playerUiState(
             image = "",
@@ -64,7 +57,6 @@ class playerViewModel @Inject constructor(
                             .build()
                     ).build()
                 mediaServiceManager.addMediaItem(item)
-//                mediaServiceManager.onPlayerEvent(playerEvent)
                 _uiState.value = _uiState.value.copy(
                     name = details.name,
                     image = details.images.previewMp3
@@ -78,6 +70,7 @@ class playerViewModel @Inject constructor(
             }
         }
     }
+
     override fun onCleared() {
         viewModelScope.launch {
             mediaServiceManager.onPlayerEvent(ManageSong.Stop)
@@ -134,9 +127,7 @@ class playerViewModel @Inject constructor(
             progress = calculatedProgress,
             progressString = calculatedProgressString
         )
-
     }
-
 
     companion object {
         private const val DURATION_FORMAT = "%02d:%02d"
@@ -144,6 +135,4 @@ class playerViewModel @Inject constructor(
         private const val DEFAULT_PROGRESS_PERCENTAGE = 0f
         private const val ONE_MINUTE = 1L
     }
-
-
 }

@@ -35,24 +35,20 @@ class MediaNotificationService : MediaSessionService() {
         flags: Int,
         startId: Int
     ): Int {
-
         val mainIntent = Intent(context, MainActivity::class.java).apply {
             this.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-
         val pendingIntent = PendingIntent.getActivity(
             context,
             MAIN_INTENT_REQUEST_CODE,
             mainIntent,
             PendingIntent.FLAG_IMMUTABLE
         )
-
         notificationManager.startNotificationService(
             mediaSessionService = this,
             mediaSession = mediaSession,
             pendingIntent = pendingIntent
         )
-
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -67,10 +63,11 @@ class MediaNotificationService : MediaSessionService() {
             }
         }
     }
-    override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession = mediaSession
+    override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession =
+        mediaSession
+
     companion object {
         private const val INITIAL_POSITION_SEEKBAR = 0L
         private const val MAIN_INTENT_REQUEST_CODE = 0
     }
-
 }

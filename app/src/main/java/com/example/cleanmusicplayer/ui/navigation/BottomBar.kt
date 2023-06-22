@@ -12,18 +12,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        BottomNavItem.Search,
-//        BottomNavItem.Player,
+        BottomNavItem.Search
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    NavigationBar (
+    NavigationBar(
         modifier = Modifier.background(
             color = MaterialTheme.colorScheme.primary,
             shape = MaterialTheme.shapes.medium
         )
-    ){
+    ) {
         screens.forEach { screen ->
             AddItem(
                 screen = screen,

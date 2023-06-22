@@ -26,9 +26,10 @@ class NotificationMediaManager @Inject constructor(
     private var notificationManager: NotificationManagerCompat =
         NotificationManagerCompat.from(context)
 
-        init {
+    init {
         createNotificationChannel()
     }
+
     @UnstableApi
     fun startNotificationService(
         mediaSessionService: MediaSessionService,
@@ -37,8 +38,6 @@ class NotificationMediaManager @Inject constructor(
     ) {
         buildNotification(mediaSession, pendingIntent)
         startForegroundNotification(mediaSessionService)
-
-
     }
 
     @UnstableApi
@@ -81,7 +80,6 @@ class NotificationMediaManager @Inject constructor(
         )
         notificationManager.createNotificationChannel(channel)
     }
-
 
     companion object {
         private const val NOTIFICATION_ID = 300
